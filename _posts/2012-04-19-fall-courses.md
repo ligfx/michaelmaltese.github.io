@@ -4,6 +4,8 @@ title: Fall Courses
 meta: Claremont
 ---
 
+And descriptions from the catalog:
+
 ## Introduction to Analysis
 
 A workshop course on how to write proofs in the context of analysis. Focus on the construction and presentation of rigorous proofs. Learn how to use the language of analysis to prove results about sequences, limits and continuity. Students regularly present proofs in both written and oral form.
