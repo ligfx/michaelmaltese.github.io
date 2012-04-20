@@ -7,4 +7,4 @@ gen:
 
 upload:
 	@echo "# Uploading to NearlyFreeSpeech..."
-	@scp -r _site nfs:
+	@scp -r _site/* nfs:
