@@ -84,6 +84,10 @@ ul.posts {
   line-height: 1.5em;
 }
 
+.site img {
+	width: 100%;
+}
+
 .promo {
 }
   .promo a {
