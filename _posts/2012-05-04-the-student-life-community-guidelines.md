@@ -16,4 +16,4 @@ The new guidelines are as follows:
 
 > If you believe we have erred or would like to talk about these guidelines, you can contact us anytime at [digitaleditor@tsl.pomona.edu](mailto:digitaleditor@tsl.pomona.edu).
 
-And May the Fourth be with you!
+May the Fourth be with you!
