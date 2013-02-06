@@ -16,10 +16,8 @@ html, body {
 }
 
 body {
-  background-color: white;
-  font: 13.34px helvetica, arial, clean, sans-serif;
-  *font-size: small;
-  text-align: center;
+  background-color: #fafafa;
+  font: 14px helvetica, arial, clean, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -27,8 +25,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 1.2em;
-  margin-bottom: 1em;
+  font-size: 2em;
   color: #333;
 }
 
@@ -37,7 +34,7 @@ p {
 }
 
 a {
-  color: #00a;
+  color: rgb(0, 119, 202);
 }
 
 a:hover {
@@ -77,10 +74,10 @@ ul.posts {
 /*****************************************************************************/
 
 .site {
-  font-size: 110%;
+  font-size: 16px;
   text-align: justify;
   width: 40em;
-  margin: 1em auto 2em auto;
+  margin: 0 auto;
   line-height: 1.5em;
 }
 
@@ -96,7 +93,7 @@ ul.posts {
   }
 
 .title {
-  color: #a00;
+  color: #333;
   font-weight: bold;
 }
 
@@ -105,7 +102,7 @@ ul.posts {
   }
 
   .title a {
-    color: #a00;
+    color: #333;
     text-decoration: none;
   }
 
