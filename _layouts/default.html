@@ -2,13 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
 <head>
    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-   <title>Michael Maltese</title>
-   <meta name="author" content="Michael Maltese" />
+   <title>Mike Maltese</title>
+   <meta name="author" content="Mike Maltese" />
 
-   <!-- syntax highlighting CSS -->
-   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
-
-   <!-- Homepage CSS -->
    <link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
 
    <!-- Google Analytics -->
@@ -26,30 +22,26 @@
 </head>
 <body>
 
-<div class="site">
+{% if page.url == "/index.html" %}  
+<aside class="site-promo">
+  <a href="/5cmenu">(The Five-College Menu has moved to the ASPC!)</a>
+</aside>
+{% endif %}
 
-  {% if page.url == "/index.html" %}  
-    <div class="promo">
-      <a href="/5cmenu">(The Five-College Menu has moved to the ASPC!)</a>
-    </div>
-  {% endif %}
-  
+<header class="site-title">
+  <h1><a href="/">Mike Maltese</a></h1>
+  <!--<nav>
+    <ul>
+      <li><a href="#">A nav link!</a></li>
+    </ul>
+  </nav>-->
+</header>
 
-  <div class="title">
-    <h1><a href="/">Michael Maltese</a></h1>
-  </div>
+<section class="site-main">
   
   {{ content }}
   
-</div>
-
-<!-- start Mixpanel --><script type="text/javascript">(function(c,a){var b,d,h,e;b=c.createElement("script");b.type="text/javascript";b.async=!0;b.src=("https:"===c.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';d=c.getElementsByTagName("script")[0];d.parentNode.insertBefore(b,d);a._i=[];a.init=function(b,c,f){function d(a,b){var c=b.split(".");2==c.length&&(a=a[c[0]],b=c[1]);a[b]=function(){a.push([b].concat(Array.prototype.slice.call(arguments,0)))}}var g=a;"undefined"!==typeof f?g=
-a[f]=[]:f="mixpanel";g.people=g.people||[];h="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config people.set people.increment".split(" ");for(e=0;e<h.length;e++)d(g,h[e]);a._i.push([b,c,f])};a.__SV=1.1;window.mixpanel=a})(document,window.mixpanel||[]);
-mixpanel.init("ee8e55c45b58665b536359722c351004");</script><!-- end Mixpanel -->
-
-<script type="text/javascript">
-  mixpanel.track("view:{{ page.url }}");
-</script>
+</section>
 
 </body>
 </html>
