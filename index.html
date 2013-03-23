@@ -2,25 +2,26 @@
 layout: default
 ---
 
-<article>
-  <p>In Dakar, Senegal through May!</p>
-  <p>Photos and occasional video at <a href="http://michaelindakar.tumblr.com">michaelindakar</a>. Email me at <a href="mailto:mike@mikemaltese.com">mike@mikemaltese.com</a>.</p>
-  <img alt="Rooftops of Dakar, Senegal" src="/images/dakar.jpg" />
-
-  <!--{% for post in site.posts limit: 1 %}
-  	<div class="post">
-  		<h1><a href="{{post.url}}">{{ post.title }}</a></h1>
-  		<p class="meta">{{ post.date | date_to_string }} &ndash; {{ post.meta }}</p>
-
-  		{{ post.content }}
-  	</div>
-  {% endfor %}
-
-  <h1>Blog posts</h1>
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>-->
-</article>
-
+{{# objects_by_day }}
+<div class="date-separator">{{ date }}</div>
+{{# objects }}
+	{{# is_link }}
+	<div class="linked">
+		<h1><a href="{{ href }}">{{ title }} &rarr;</a></h1>
+		<div class="linked-body">
+			{{{ body }}}
+			<span style="color: #aaa">&#9733;</span>
+		</div>
+	</div>
+	{{/ is_link}}
+	{{# is_post }}
+	<div class="post">
+		<h1><a href="{{ url }}">{{{ title }}}</a></h1>
+		<div class="post-body">
+			{{{ body }}}
+			<span style="color: #aaa">&#9733;</span>
+		</div>
+	</div>
+	{{/ is_post}}
+{{/ objects }}
+{{/ objects_by_day }}

@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background-color: #fff;
+  line-height: 1.5em;
+  color: #222;
+  font: 12px verdana, sans-serif;
+}
+
+.site-promo {
+  text-align: center;
+  background-color: rgb(246, 246, 246);
+}
+
+.site-promo a {
+  display: inline-block;
+  padding: 0.5em;
+}
+
+.wrapper {
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+dt {
+  margin-bottom: 1em;
+  font-weight: bold;
+}
+
+dd {
+  margin-left: 1em;
+}
+
+.header {
+  position: relative;
+  float: left;
+  margin-left: -250px;
+  width: 170px;
+}
+
+.header img {
+  width: 100px;
+  height: 100px;
+}
+
+.author-image-link {
+  display: block;
+  margin: 10px 0;
+  border: none;
+}
+
+.author-image-link:hover {
+  background-color: transparent;
+}
+
+.author-name {
+  color: rgb(33, 147, 226);
+  font-size: 18px;
+  line-height: 28px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: lowercase;
+  border: none;
+}
+
+a {
+  color: rgb(33, 147, 226);
+  text-decoration: underline;
+}
+
+a:hover {
+  background-color: rgb(33, 147, 226);
+  color: white;
+}
+
+.linked {
+  margin-bottom: 2em;
+}
+
+.linked h1 {
+  font-weight: bold;
+  font-size: 18px;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.linked h1 a {
+  color: rgb(51, 51, 51);
+}
+
+.linked h1 a:hover {
+  color: white;
+}
+
+.linked-body {
+}
+
+blockquote {
+  padding-left: 1em;
+  border-left: 1px solid rgb(33, 147, 226);
+  color: #666;
+}
+
+.date-separator {
+  margin: 3em 0 0em;
+  font-size: 14px;
+  /*color: rgb(33, 147, 226);*/
+  color: #666;
+  font-family: "Helvetica Neue", sans-serif;
+}
+
+.content {
+  padding-top: 1px;
+}
+
+.post {
+  margin-bottom: 2em;
+}
+
+.post h2 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 13px;
+}
+
+.post h1 {
+  font-size: 18px;
+  font-family: "Helvetica Neue", sans-serif;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.post h1 a {
+  color: rgb(51, 51, 51);
+  text-decoration: none;
+}
+.post h1 a:hover {
+  color: white;
+}
+
+.post-meta {
+  text-align: center;
+  font-size: 11px;
+  margin-bottom: 1em;
+}
+
+.footer {
+  color: #666;
+  padding: 2em 0;
+  text-align: center ;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+  margin-bottom: 1em;
+}
+
+p {
+  margin-bottom: 1em;
+  line-height: 1.25em;
+}
+
+img {
+  width: 100%;
+}

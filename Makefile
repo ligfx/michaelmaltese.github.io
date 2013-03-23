@@ -1,8 +1,8 @@
 default: gen upload push
 
 gen:
-	@echo "# Generating static files with Jekyll..."
-	@jekyll
+	@echo "# Generating static files with Edison..."
+	@edison up
 	@echo
 
 upload:

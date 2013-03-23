@@ -6,7 +6,7 @@ layout: post
 
 ![](/images/mission-beach.jpg)
 
-(Throwback: the photo's from San Diego's Mission Beach in May. I haven't taken any photos of Virginia Beach.)
+*(Throwback: the photo's from San Diego's Mission Beach in May. I haven't taken any photos of Virginia Beach.)*
 
 So I'm in Virginia Beach! It feels so weird to leave San Franciso. Virginia Beach is a gorgeous place, but it's hard to beat running along the Embarcadero or ordering coffee from the friendly guy at the Civic Center Starbucks who always remembers me.
 
