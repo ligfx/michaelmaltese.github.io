@@ -1,5 +1,5 @@
 ---
-title: "Linked List: \"Rich people have raincoats\""
+title: "\"Rich people have raincoats\""
 ---
 
 [Wealth, risk, and stuff](http://vruba.tumblr.com/post/45256059128/wealth-risk-and-stuff)
