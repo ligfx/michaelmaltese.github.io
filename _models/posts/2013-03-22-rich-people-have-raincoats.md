@@ -28,7 +28,7 @@ title: "\"Rich people have raincoats\""
 
 [Growing Africa: Unlocking the Potential of Agribusiness](http://siteresources.worldbank.org/INTAFRICA/Resources/africa-agribusiness-report-2013.pdf)
 
-: The World Bank:
+: Interesting-looking paper from The World Bank:
 
   > Africa now earns an average of 24 per cent of its annual growth from its farmers and their crops. If matched with more electricity and irrigation, smart business and trade policies and a dynamic private agribusiness sector that works side by side with government to link farmers with consumers in an increasingly urbanized Africa, the World Bank estimates that agriculture and agribusiness together could command a US$ 1 trillion presence in Africa’s regional economy by 2030
 
