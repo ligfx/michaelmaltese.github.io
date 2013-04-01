@@ -199,6 +199,14 @@ body.index .author-image-link img {
   height: 200px;
 }
 
+body.index h1 {
+  font-size: 26px;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  color: #495961;
+  text-align: center;
+}
+
 .cc-by {
   width: auto;
   height: auto;
