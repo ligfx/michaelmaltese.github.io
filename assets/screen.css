@@ -181,3 +181,25 @@ p {
 img {
   width: 100%;
 }
+
+body.index strong {
+  color: rgb(33, 147, 226);
+}
+
+body.index .wrapper {
+  font-size:;
+}
+
+body.index .author-image-link {
+  text-align: center;
+}
+
+body.index .author-image-link img {
+  width: 200px;
+  height: 200px;
+}
+
+.cc-by {
+  width: auto;
+  height: auto;
+}

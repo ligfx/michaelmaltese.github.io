@@ -43,7 +43,7 @@ Edison.config do
 		end
 	end
 
-	routes.url "index.html" do |data|
+	routes.url "blog.html" do |data|
 		data.objects_by_day = objects.group_by(&:date).
 		to_a.
 		sort_by { |date, _| date }.
@@ -54,7 +54,5 @@ Edison.config do
 			{:date => date,
 			 :objects => os}
 		end
-
-		data.show_promo = true
 	end
 end

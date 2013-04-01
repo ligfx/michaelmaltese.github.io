@@ -1,27 +1,7 @@
 ---
-layout: default
+layout: index
 ---
 
-{{# objects_by_day }}
-<div class="date-separator">{{ date }}</div>
-{{# objects }}
-	{{# is_link }}
-	<div class="linked">
-		<h1><a href="{{ href }}">{{ title }} &rarr;</a></h1>
-		<div class="linked-body">
-			{{{ body }}}
-			<span style="color: #aaa">&#9733;</span>
-		</div>
-	</div>
-	{{/ is_link}}
-	{{# is_post }}
-	<div class="post">
-		<h1><a href="{{ url }}">{{{ title }}}</a></h1>
-		<div class="post-body">
-			{{{ body }}}
-			<span style="color: #aaa">&#9733;</span>
-		</div>
-	</div>
-	{{/ is_post}}
-{{/ objects }}
-{{/ objects_by_day }}
+<p>I'm <strong>Michael</strong>, a math and economics student at Pomona College in Los Angeles, interested in economic policy, statistics, media, and technology. This semester I'm in Dakar, Senegal studying French, Wolof, and development.</p>
+
+<p>I tweet at <a href="https://twitter.com/michaelmaltese">@michaelmaltese</a> and put up code on <a href="https://github.com/michaelmaltese">GitHub</a>. You can also <a href="mailto:michael.maltese@pomona.edu">email me</a>.</p>
