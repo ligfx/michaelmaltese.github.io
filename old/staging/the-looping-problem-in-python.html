@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Michael Maltese</title>
+   <meta name="author" content="Michael Maltese" />
+
+   <!-- syntax highlighting CSS -->
+   <link rel="stylesheet" href="/css/syntax.css" type="text/css" />
+
+   <!-- Homepage CSS -->
+   <link rel="stylesheet" href="/css/screen.css" type="text/css" media="screen, projection" />
+
+   <!-- MathJax CDN -->
+   <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+
+<div class="site">
+
+  
+  
+
+  <div class="title">
+    <h1><a href="/">Michael Maltese</a></h1>
+    <a class="extra" href="/">home</a>
+  </div>
+  
+  <div class="post">
+	<h1><a href="/2012/04/28/the-looping-problem-in-python.html">The Looping Problem, Using Python Iterators</a></h1>
+	<p class="meta">28 Apr 2012 &ndash; Claremont</p>
+
+	<p>Let's look at the classic Looping Problem: given a singly-linked list, how do we tell if it loops or not? The naïve way is to keep track of every node you've already seen, but for fun let's do it in constant memory.</p>
+
+<p><a href="http://ostermiller.org/find_loop_singly_linked_list.html">There are a lot of solutions</a>, but I think two are particularly simple and elegant. You can check every node before the current one, or you can use a "tortoise and hare" method where one iterator iterates twice as fast. That link gives the algorithms in a pseudo-Java language, but in Python you can write them a lot more succinctly with iterators.</p>
+
+<p>Why iterators? Python provides these nice abstractions so we don't have to worry about the low-level crap in our programs. Sure, you could bother keeping track of <code>while</code> loops and call <code>nextNode()</code> manually, but using these features lets you express more accurately what the algorithm is doing. You don't have to worry about incrementing <code>i</code> and <code>j</code> variables inside loops, you just figure out if a list loops or not.</p>
+
+<p>Both of these examples make use of the Python built-in module <code>itertools</code>, which provides lazy iterators and some other cool stuff. If you're not using it already, you should be.</p>
+
+<h2>Solution 1: Check every node we've already seen</h2>
+
+<p>This solutions runs in O(N<sup>2),</sup> but it's nice because it's easy to understand. For each node, we iterate through every node up to just before the current node, checking if any match. If they do, we have a loop.</p>
+
+<p>In Python, you can use the <code>itertools.islice(seq, n)</code> function to lazily take the first n elements of a sequence. Combining this with the built-in <code>enumerate(seq)</code>, which adds indices to an iterator, you can write this algorithm as:</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
+<span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">islice</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre>
+</div>
+
+
+<p>Nice and pretty.</p>
+
+<h2>Solution 2: The tortoise and the hare</h2>
+
+<p>This solution runs in O(N). You keep two iterators referencing the same linked-list, and advance one iterator faster than the other. If there is a loop, the faster iterator will loop around and catch up with the slower iterator.</p>
+
+<p>In Python, the key function is <code>itertools.izip(seq_a, seq_b)</code>, a lazy version of the built-in function <code>zip</code>. Zip constructs an iterator yielding the i-th element of both sequences at the same time—for example, <code>zip([1,2], [a, b])</code> would give you <code>[(1,'a'), (2, 'b')]</code>. This algorithm needs the lazy version because we might have a loop, and trying to construct a list will eventually cause your Python interpreter to run out of memory.</p>
+
+<p>I also use a function <code>chunk</code> which looks pretty weird. Don't worry, it just clusters the sequence into n-length tuples, like the <a href="http://docs.python.org/library/functions.html#zip">standard library docs say</a>.</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span>
+<span class="k">def</span> <span class="nf">chunk</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">izip</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">iter</span><span class="p">(</span><span class="n">seq</span><span class="p">)]</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">slow_node</span><span class="p">,</span> <span class="n">fast_node_pair</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">chunk</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="mi">2</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">slow_node</span> <span class="ow">in</span> <span class="n">fast_node_pair</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre>
+</div>
+
+
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>26 Apr 2012</span> &raquo; <a href="/2012/04/26/chebyshev.html">Chebyshev's Linkage</a></li>
+    
+      <li><span>25 Apr 2012</span> &raquo; <a href="/2012/04/25/using-the-its-scanner.html">Using the ITS Scanner</a></li>
+    
+      <li><span>19 Apr 2012</span> &raquo; <a href="/2012/04/19/fall-courses.html">Fall Courses</a></li>
+    
+  </ul>
+</div>
+  
+  <div class="footer">
+    <div class="contact">
+      <p>
+        Michael Maltese<br />
+        mike@mikemaltese.com
+      </p>
+    </div>
+    <div class="contact">
+      <p>
+        <a href="http://github.com/mikemaltese/">github.com/mikemaltese</a><br />
+        <a href="http://twitter.com/michaelmaltese/">twitter.com/michaelmaltese</a><br />
+      </p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

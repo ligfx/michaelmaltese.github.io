@@ -1,0 +1,43 @@
+body {
+	background-color: #fff;
+	color: #333;
+	margin: 0;
+	padding: 0;
+}
+
+body, p, ol, ul, td {
+  font-family: Garamond, Georgia, serif;
+  font-size: 16px;
+}
+
+a { color: #666; }
+a:hover { color: #fff; background-color: #333; text-decoration: none; }
+
+h1, h2 { font-weight: normal; }
+
+section h1 {
+	font-size: 30px;
+	line-height: 36px;
+	margin: 0;
+}
+
+body {
+	width: 540px;
+	margin: 40px auto;
+}
+
+p {
+	font-size: 17px;
+	line-height: 24px;
+}
+
+header {
+	text-align: center;
+}
+
+header > h1 {
+	font-size: 4em;
+	margin-bottom: 0.16em;
+	font-family: 'OFL Sorts Mill Goudy TT', Garamond, Georgia, serif;
+	text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}

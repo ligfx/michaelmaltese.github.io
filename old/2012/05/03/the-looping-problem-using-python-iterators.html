@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>Mike Maltese</title>
+   <meta name="author" content="Mike Maltese" />
+
+   <link rel="stylesheet" href="/css/screen.css" type="text/css" media="all" />
+
+   <!-- Google Analytics -->
+   <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-20212552-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body>
+
+
+
+<header class="site-title">
+  <h1><a href="/">Mike Maltese</a></h1>
+  <!--<nav>
+    <ul>
+      <li><a href="#">A nav link!</a></li>
+    </ul>
+  </nav>-->
+</header>
+
+<section class="site-main">
+  
+  <div class="post">
+	<h1><a href="/2012/05/03/the-looping-problem-using-python-iterators.html">The Looping Problem, Using Python Iterators</a></h1>
+	<p class="meta">03 May 2012 &ndash; Claremont</p>
+
+	<p>Let's look at the classic Looping Problem: given a singly-linked list, how do we tell if it loops or not? The naïve way is to keep track of every node you've already seen, but for fun let's do it in constant memory!</p>
+
+<p><a href="http://ostermiller.org/find_loop_singly_linked_list.html">There are a lot of solutions</a>, and I'm going to talk about two of them. You can check every node before the current one, or you can use a "tortoise and hare" method where one iterator iterates twice as fast as the other. The link above gives the algorithms in a pseudo-Java language, but in Python you can write them a lot more succinctly with iterators.</p>
+
+<p>You should use iterators because they make the purpose of your code clearer. Does your code check loops, or increment <code>i</code> a bunch of times? The less extra cruft, the better (you probably already know this, which is why you use Python instead of C or Java).</p>
+
+<p>Both of the following examples make use of the Python built-in module <a href="http://docs.python.org/library/itertools.html">itertools</a>, which provides lazy iterators and some other cool stuff. If you're not using it already, you should be!</p>
+
+<h2>Solution 1: Check every node you've already seen</h2>
+
+<p>This solutions runs in O(N<sup>2),</sup> but it's nice because it's easy to understand. For each node, we iterate through every node up to just before the current node, checking for matches. If we find any, then we have a loop.</p>
+
+<p>In Python, you can use <a href="http://docs.python.org/library/itertools.html#itertools.islice">itertools.islice</a> to lazily take the first n elements of a sequence. Combining this with the built-in <a href="http://docs.python.org/library/functions.html#enumerate">enumerate</a>, which adds indices to an iterator, you can write this algorithm as:</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">islice</span>
+<span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="n">node</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">islice</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div>
+
+
+
+
+<br/>
+
+
+<h2>Solution 2: The tortoise and the hare</h2>
+
+<p>This one runs in O(N). You keep two iterators referencing the same linked-list, and advance one iterator faster than the other. If there's a loop, the faster iterator will loop around and catch up with the slower iterator.</p>
+
+<p>In Python, the key is <a href="http://docs.python.org/library/itertools.html#itertools.izip">itertools.izip</a>, a lazy version of <a href="http://docs.python.org/library/functions.html#zip">the built-in function zip</a>. Zip constructs an iterator yielding an element from both sequences at the same time—for example, <code>zip([1,2], [a, b])</code> would give you <code>[(1,'a'), (2, 'b')]</code>. This algorithm needs the lazy version because if you do have a loop, then trying to construct a list will eventually make the Python interpreter run out of memory.</p>
+
+<p>I also define a function <code>skip</code> that creates the fast iterator. It lazily yields the elements of a sequence, skipping n elements every time. Calling <code>skip(seq, 1)</code> gives you an iterator that goes twice as fast as a normal iterator.</p>
+
+<p>The <code>skip</code> function also shows off some cool underlying features of Python:</p>
+
+<p>The <a href="http://docs.python.org/library/functions.html#iter">iter</a> function turns any collection into an iterator, so all you have to give <code>skip</code> is some object which supports <a href="http://docs.python.org/reference/datamodel.html#object.__iter__">the iteration protocol</a>. Any object with an <code>__iter__</code> method can be turned into an iterator.</p>
+
+<p>You might be curious about the infinite while loop—what happens when it reaches the end of the list? When an iterator runs out of available elements, it raises the <a href="http://docs.python.org/library/exceptions.html#exceptions.StopIteration">StopIteration</a> exception. Since the <code>skip</code> function doesn't catch it, it's essentially as though it raises the exception itself, which is exactly what it's supposed to do when it reaches the end of the list.</p>
+
+<p>Here's the solution:</p>
+
+<div class="highlight"><pre><code class="python"><span class="k">def</span> <span class="nf">skip</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+    <span class="n">seq</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="nb">next</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="nb">next</span><span class="p">(</span><span class="n">seq</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">izip</span>
+<span class="k">def</span> <span class="nf">is_loop</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">slow_node</span><span class="p">,</span> <span class="n">fast_node</span> <span class="ow">in</span> <span class="n">izip</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">skip</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="mi">1</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">slow_node</span> <span class="o">==</span> <span class="n">fast_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div>
+
+
+
+
+<br/>
+
+
+</div>
+
+<div class="related">
+  <h2>Related Posts</h2>
+  <ul class="posts">
+    
+      <li><span>19 Aug 2012</span> &raquo; <a href="/2012/08/19/pomona.html">Pomona</a></li>
+    
+      <li><span>31 Jul 2012</span> &raquo; <a href="/2012/07/31/underbelly.html">Underbelly</a></li>
+    
+      <li><span>28 Jul 2012</span> &raquo; <a href="/2012/07/28/suits-and-capitalist-media-consumption.html">Suits and Capitalist Media Consumption</a></li>
+    
+      <li><span>21 Jul 2012</span> &raquo; <a href="/2012/07/21/impact.html">Impact</a></li>
+    
+      <li><span>19 Jul 2012</span> &raquo; <a href="/2012/07/19/falling-off.html">Falling off</a></li>
+    
+  </ul>
+</div>
+  
+</section>
+
+</body>
+</html>
